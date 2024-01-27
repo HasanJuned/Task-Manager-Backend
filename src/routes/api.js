@@ -15,6 +15,9 @@ router.post("/RecoverResetPassword",UserAuthController.RecoverResetPassword);
 
 router.post("/createTask",AuthVerifyMiddleware,TasksController.createTask);
 router.get("/deleteTask/:id",AuthVerifyMiddleware,TasksController.deleteTask);
+router.get("/updateTaskStatus/:id/:status",AuthVerifyMiddleware,TasksController.updateTaskStatus);
+router.get("/listTaskByStatus/:status",AuthVerifyMiddleware,TasksController.listTaskByStatus);
+router.get("/taskStatusCount",AuthVerifyMiddleware,TasksController.taskStatusCount);
 
 
 module.exports = router;
