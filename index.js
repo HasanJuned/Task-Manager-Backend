@@ -1,7 +1,9 @@
 // Application Run
 
-const app = require('./app');
+const app = require("./app");
 
-app.listen(2005,function(){
-    console.log('Listening port 2005');
+const port = process.env.PORT || 2005;
+
+app.listen(port, function () {
+  console.log(`Listening port ${port}`);
 });
