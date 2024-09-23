@@ -1,3 +1,5 @@
-#Task Manager Backend Development
+# Task Manager
+This is Task Manager project backend on the live server
 
-This is task manager Rest Api + backend project using MEN (MongoDB, Express, NodeJs)
+# Use:
+The E-education platform of Ostad's students is using this backend's API.
