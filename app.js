@@ -1,5 +1,6 @@
 // Application Configuration
 require("dotenv").config();
+require("nodemailer");
 const express = require("express");
 const app = express();
 const router = require("./src/routes/api");
