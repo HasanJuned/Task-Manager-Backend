@@ -23,8 +23,8 @@ exports.Login=async (req,res)=>{
 
 
     try{
-        let result = await UserModel.find(reqBody).count();
-        if(result===1){
+        let result = await UserModel.find(reqBody);
+        if(result.count() === 1){
             let Payload = {
                 exp:Math.floor(Date.now()/1000)+(24*60*60),
                 data: reqBody['email']
