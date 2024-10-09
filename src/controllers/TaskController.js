@@ -10,7 +10,7 @@ exports.createTask=async(req,res)=>{
         res.status(200).json({ status: 'success', data: result });
 
     }catch(e){
-        res.status(200).json({ status: 'fail', data: 'Internal Server Error' });
+        res.status(406).json({ status: 'fail', data: e.message });
     }
 
 
@@ -26,7 +26,7 @@ exports.deleteTask=async(req,res)=>{
         res.status(200).json({ status: 'success', data: result });
 
     }catch(e){
-        res.status(200).json({ status: 'fail', data: 'Internal Server Error' });
+        res.status(406).json({ status: 'fail', data: e.message });
 
     }
 }
@@ -45,7 +45,7 @@ exports.updateTaskStatus=async(req,res)=>{
 
 
     }catch(e){
-        res.status(200).json({ status: 'fail', data: 'Internal Server Error' });
+        res.status(406).json({ status: 'fail', data: e.message });
 
     }
 
@@ -64,7 +64,7 @@ exports.listTaskByStatus=async(req,res)=>{
 
 
     }catch(e){
-        res.status(200).json({ status: 'fail', data: 'Internal Server Error' });
+        res.status(406).json({ status: 'fail', data: e.message });
     }
 
 }
@@ -82,7 +82,7 @@ exports.taskStatusCount=async(req,res)=>{
         res.status(200).json({ status: 'success', data: result });
 
     }catch(e){
-        res.status(200).json({ status: 'fail', data: 'Internal Server Error' });
+        res.status(404).json({ status: 'fail', data: e.message });
     }
 
 

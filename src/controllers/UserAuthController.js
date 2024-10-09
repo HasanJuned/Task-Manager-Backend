@@ -12,7 +12,7 @@ exports.Registration=async (req,res)=>{
         res.status(200).json({status: "success", data: result})
 
     }catch(e){
-        res.status(200).json({status: "fail", data: "Something went wrong"})
+        res.status(400).json({status: "fail", data: e.message})
     }
 
 }
@@ -24,22 +24,24 @@ exports.Login=async (req,res)=>{
 
     try{
         let result = await UserModel.find(reqBody).count();
-        if(result==1){
+        if(result===1){
             let Payload = {
                 exp:Math.floor(Date.now()/1000)+(24*60*60),
                 data: reqBody['email']
             }
 
+            let userDetails = await result;
+
             let token = jwt.sign(Payload, 'SecretKey123456789');
-            res.status(200).json({status: "success", data: reqBody, token: token})
+            res.status(200).json({status: "success", data: userDetails, token: token})
 
 
         }else{
-            res.status(200).json({status: "fail", data: "No user found. Try again!"})
+            res.status(404).json({status: "fail", data: "No user found. Try again!"})
         }
         
     }catch(e){
-        res.status(200).json({status: "fail", data: "Something went wrong"})
+        res.status(200).json({status: "fail", data: e.message})
     }
 
 }
@@ -52,7 +54,7 @@ exports.ProfileDetails = async (req, res) => {
       res.status(200).json({ status: 'success', data: result });
     } catch (e) {
       console.error(e);
-      return res.status(200).json({ status: 'fail', data: 'Internal Server Error' });
+      return res.status(404).json({ status: 'fail', data: e.message });
     }
   };
 
@@ -64,7 +66,7 @@ exports.ProfileDetails = async (req, res) => {
       res.status(200).json({ status: 'success', data: result });
     } catch (e) {
       console.error(e);
-      return res.status(200).json({ status: 'fail', data: 'Internal Server Error' });
+      return res.status(404).json({ status: 'fail', data: e.message });
     }
   };
 
@@ -84,7 +86,7 @@ exports.ProfileDetails = async (req, res) => {
 
 
     }else{
-        res.status(200).json({status: "fail", data: "No user found. Try again!"})
+        res.status(404).json({status: "fail", data: "No user found. Try again!"})
     }
 
   }
@@ -104,7 +106,7 @@ exports.ProfileDetails = async (req, res) => {
 
 
     }else{
-        res.status(200).json({status: "fail", data: "Invalid Otp"})
+        res.status(406).json({status: "fail", data: "Invalid Otp"})
     }
 
   }
@@ -124,7 +126,7 @@ exports.ProfileDetails = async (req, res) => {
 
 
     }else{
-        res.status(200).json({status: "fail", data: "Password reset failed"})
+        res.status(406).json({status: "fail", data: "Password reset failed"})
     }
 
   }
