@@ -30,7 +30,7 @@ exports.Login=async (req,res)=>{
                 data: reqBody['email']
             }
 
-            let userDetails = await result;
+            let userDetails = result;
 
             let token = jwt.sign(Payload, 'SecretKey123456789');
             res.status(200).json({status: "success", data: userDetails, token: token})
