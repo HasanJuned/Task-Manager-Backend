@@ -12,7 +12,7 @@ exports.Registration=async (req,res)=>{
         res.status(200).json({status: "success", data: result})
 
     }catch(e){
-        res.status(400).json({status: "fail", data: e.message})
+        res.status(400).json({status: "fail", data: 'Duplicate email! Try again.'});
     }
 
 }
