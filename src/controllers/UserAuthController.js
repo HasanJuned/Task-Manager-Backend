@@ -12,7 +12,7 @@ exports.Registration=async (req,res)=>{
         res.status(200).json({status: "success", data: result})
 
     }catch(e){
-        res.status(400).json({status: "fail", data: 'Duplicate email! Try again.'});
+        res.status(400).json({status: "fail", data: 'This email is already registered! Try again with different email'});
     }
 
 }
@@ -30,14 +30,14 @@ exports.Login=async (req,res)=>{
                 data: reqBody['email']
             }
 
-            let userDetails = await UserModel.find(reqBody);
+            let userDetails = await UserModel.findOne(reqBody).select('-password');
 
             let token = jwt.sign(Payload, 'SecretKey123456789');
-            res.status(200).json({status: "success", data: userDetails, token: token})
+            res.status(200).json({status: "success", data: userDetails, token: token});
 
 
         }else{
-            res.status(404).json({status: "fail", data: "No user found. Try again!"})
+            res.status(404).json({status: "fail", data: "No user found, Check email and password and try again!"})
         }
         
     }catch(e){
